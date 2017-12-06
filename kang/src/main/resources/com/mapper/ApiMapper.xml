@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.ApiMapper">
+<resultMap id="NoCascadeResultMap" type="PSGAPI">
+		<id column="API_ID" property="id" jdbcType="BIGINT" />
+		<result column="API_PSG_ID" property="psgId" jdbcType="BIGINT" />
+		<result column="API_LAST_NAME" property="lastName" jdbcType="VARCHAR" />
+		<result column="API_FIRST_NAME" property="firstName" jdbcType="VARCHAR" />
+		<result column="API_MIDDLE_NAME" property="middleName"
+			jdbcType="VARCHAR" />
+		<result column="API_GENDER" property="gender" jdbcType="VARCHAR" />
+		<result column="API_PLACE_OF_BIRTH" property="placeOfBirth"
+			jdbcType="VARCHAR" />
+		<result column="API_DATE_OF_BIRTH" property="dateOfBirth"
+			jdbcType="VARCHAR" />
+		<result column="API_NATIONALITY" property="nationality"
+			jdbcType="VARCHAR" />
+		<result column="API_COUNTRY_OF_RESIDENCE" property="countryOfResidence"
+			jdbcType="VARCHAR" />
+		<result column="API_IN_TRANSIT_PSG_FLAG" property="inTransitPsgFlag"
+			jdbcType="VARCHAR" />
+		<result column="API_PSPT_NO" property="psptNo" jdbcType="VARCHAR" />
+		<result column="API_PSPT_TYPE" property="psptType" jdbcType="VARCHAR" />
+		<result column="API_PSPT_ISSUE_DATE" property="psptIssueDate"
+			jdbcType="VARCHAR" />
+		<result column="API_PSPT_EXPIRY_DATE" property="psptExpiryDate"
+			jdbcType="VARCHAR" />
+		<result column="API_PSPT_ISSUE_COUNTRY" property="psptIssueCountry"
+			jdbcType="VARCHAR" />
+		<result column="API_PRIMARY_PASSPORT_HOLDER" property="primaryPassportHolder"
+			jdbcType="VARCHAR" />
+		<result column="API_REDRESS_NO" property="redressNo" jdbcType="VARCHAR" />
+		<result column="API_KNOWN_TRAVELER_NO" property="knownTravelerNo"
+			jdbcType="VARCHAR" />
+		<result column="API_VISA_NO" property="visaNo" jdbcType="VARCHAR" />
+		<result column="API_VISA_TYPE" property="visaType" jdbcType="VARCHAR" />
+		<result column="API_VISA_ISSUE_DATE" property="visaIssueDate"
+			jdbcType="VARCHAR" />
+		<result column="API_VISA_EXPIRY_DATE" property="visaExpiryDate"
+			jdbcType="VARCHAR" />
+		<result column="API_VISA_ISSUE_PLACE" property="visaIssuePlace"
+			jdbcType="VARCHAR" />
+		<result column="API_OTHER_NO" property="otherNo" jdbcType="VARCHAR" />
+		<result column="API_OTHER_TYPE" property="otherType" jdbcType="VARCHAR" />
+		<result column="API_OTHER_ISSUE_DATE" property="otherIssueDate"
+			jdbcType="VARCHAR" />
+		<result column="API_OTHER_EXPIRY_DATE" property="otherExpiryDate"
+			jdbcType="VARCHAR" />
+		<result column="API_OTHER_ISSUE_PLACE" property="otherIssuePlace"
+			jdbcType="VARCHAR" />
+		<result column="API_HOME_ADDRESS" property="homeAddress"
+			jdbcType="VARCHAR" />
+		<result column="API_HOME_CITY" property="homeCity" jdbcType="VARCHAR" />
+		<result column="API_HOME_STATE" property="homeState" jdbcType="VARCHAR" />
+		<result column="API_HOME_COUNTRY" property="homeCountry"
+			jdbcType="VARCHAR" />
+		<result column="API_HOME_POSTAL_CODE" property="homePostalCode"
+			jdbcType="VARCHAR" />
+		<result column="API_HOME_CONTACT_PHONE" property="homeContactPhone"
+			jdbcType="VARCHAR" />
+		<result column="API_DEST_ADDRESS" property="destAddress"
+			jdbcType="VARCHAR" />
+		<result column="API_DEST_CITY" property="destCity" jdbcType="VARCHAR" />
+		<result column="API_DEST_STATE" property="destState" jdbcType="VARCHAR" />
+		<result column="API_DEST_COUNTRY" property="destCountry"
+			jdbcType="VARCHAR" />
+		<result column="API_DEST_POSTAL_CODE" property="destPostalCode"
+			jdbcType="VARCHAR" />
+		<result column="API_DEST_CONTACT_PHONE" property="destContactPhone"
+			jdbcType="VARCHAR" />
+		<result column="DATA_SOURCE" property="dataSource" jdbcType="INTEGER" />
+		<result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="API_IS_MANUAL_ENTRY" property="isManualEntry" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID AS API_ID, API_PSG_ID,
+		API_LAST_NAME,
+		API_FIRST_NAME,
+		API_MIDDLE_NAME, API_GENDER, API_PLACE_OF_BIRTH,
+		API_DATE_OF_BIRTH,
+		API_NATIONALITY, API_COUNTRY_OF_RESIDENCE, API_IN_TRANSIT_PSG_FLAG,
+		API_PSPT_NO, API_PSPT_TYPE,
+		API_PSPT_ISSUE_DATE,
+		CASE WHEN
+		API_PSPT_EXPIRY_DATE IS NOT NULL THEN
+		upper(to_char(TO_DATE(API_PSPT_EXPIRY_DATE,'YYMMDD'),'ddmonyy','nls_date_language=american'))
+		ELSE NULL END API_PSPT_EXPIRY_DATE,
+		API_PSPT_ISSUE_COUNTRY,
+		API_PRIMARY_PASSPORT_HOLDER,
+		API_REDRESS_NO,
+		API_KNOWN_TRAVELER_NO, API_VISA_NO, API_VISA_TYPE,
+		API_VISA_ISSUE_DATE,
+		CASE WHEN API_VISA_EXPIRY_DATE IS NOT NULL THEN
+		upper(to_char(TO_DATE(API_VISA_EXPIRY_DATE,'YYMMDD'),'ddmonyy','nls_date_language=american'))
+		ELSE NULL END API_VISA_EXPIRY_DATE,
+		API_VISA_ISSUE_PLACE,
+		API_OTHER_NO,
+		API_OTHER_TYPE,
+		API_OTHER_ISSUE_DATE,
+		CASE WHEN API_OTHER_EXPIRY_DATE IS
+		NOT NULL THEN
+		upper(to_char(TO_DATE(API_OTHER_EXPIRY_DATE,'YYMMDD'),'ddmonyy','nls_date_language=american'))
+		ELSE NULL END API_OTHER_EXPIRY_DATE,
+		API_OTHER_ISSUE_PLACE,
+		API_HOME_ADDRESS,
+		API_HOME_CITY,
+		API_HOME_STATE,
+		API_HOME_COUNTRY,
+		API_HOME_POSTAL_CODE,
+		API_HOME_CONTACT_PHONE,
+		API_DEST_ADDRESS,
+		API_DEST_CITY,
+		API_DEST_STATE,
+		API_DEST_COUNTRY,
+		API_DEST_POSTAL_CODE,
+		API_DEST_CONTACT_PHONE,
+		API_IS_MANUAL_ENTRY
+	</sql>
+	<select id="seleteApiById" resultMap="NoCascadeResultMap"
+		parameterType="Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_DEP_CP_API
+		where ID = #{id,jdbcType=BIGINT}
+		AND
+		IS_VALID = '1'
+	</select>
+
+</mapper>
