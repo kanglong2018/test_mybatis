@@ -1,4 +1,9 @@
 asdf
 dd
 test1
+<<<<<<< HEAD
 develop
+=======
+test1
+test2
+>>>>>>> fix texst 2
